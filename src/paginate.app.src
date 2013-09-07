@@ -1,0 +1,12 @@
+%% vim: ts=2 sw=2 et ft=erlang
+{application, paginate,
+ [
+  {description, "A simple pagination element for Nitrogen, primarily for displaying lists of items for which it is typical to have many (such as lists of accounts or inventory)"},
+  {vsn, git},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {env, []}
+ ]}.

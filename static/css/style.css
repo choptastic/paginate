@@ -1,0 +1,45 @@
+.paginate table {
+	width:100%;
+}
+
+input[type=button].paginate_reset_button,
+button.paginate_reset_button {
+	background:#900;
+	color:#fff;
+
+}
+/* Paginate Element */
+
+.paginate_header {
+	position:relative;
+}
+
+.paginate_header_search
+{
+	text-align:left;
+}
+
+.paginate_perpage_wrapper {
+	text-align:right;
+}
+
+.paginate_current {
+	font-weight:bold;
+	padding: 0.2em 0.6em 0.2em 0.6em;
+	margin: 0 0.3em 0 0.3em;
+}
+
+.paginate_page_list {
+	padding: 0.6em 0 0.6em 0;
+	clear:both;
+	line-height:2.2em;
+}
+
+a.paginate_page:visited,
+a.paginate_page:link {
+	padding: 0.2em 0.6em 0.2em 0.6em;
+	border: 1px #777 solid;
+	border-radius:3px;
+	margin: 0 0.3em 0 0.3em;
+}
+
