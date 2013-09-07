@@ -127,7 +127,7 @@ page_link(Current, _Selected, Postback) ->
     }.
     
 total_pages(TotalItems, PerPage) ->
-    _TotalPages = (TotalItems div PerPage) + ?IF3(TotalItems rem PerPage == 0, 0, 1).
+    _TotalPages = (TotalItems div PerPage) + ?WF_IF(TotalItems rem PerPage == 0, 0, 1).
 
 set_refresh_postback(Tag,Postback) ->
     wf:state({paginate_refresh_postback,Tag},Postback).
