@@ -72,19 +72,30 @@ render_element(Rec = #paginate{}) ->
                 #singlerow{cells=[
                     #tablecell{body=[
                         #panel{class=paginate_header_search,body=[
-                            #textbox{id=SearchTextID,postback=Postback,delegate=?MODULE},
-                            #button{text=Rec#paginate.search_button_text,postback=Postback,delegate=?MODULE},
-                            #button{
-                                id=ResetButtonID,
-                                text=Rec#paginate.reset_button_text,
-                                class=paginate_reset_button,
-                                style="display:none",
-                                click=[
-                                    #fade{},
-                                    #set{target=SearchTextID,value=""},
-                                    #event{delegate=?MODULE,postback=Postback#paginate_postback{mode=reset}}
-                                ]
-                            }
+                            #panel{class='col-lg-4', body=[
+                                #panel{class='input-group',body=[
+                                    #textbox{class='form-control',id=SearchTextID,postback=Postback,delegate=?MODULE},
+                                    #span{class='input-group-btn',body=[
+                                        #button{
+                                            text=Rec#paginate.search_button_text,
+                                            postback=Postback,
+                                            delegate=?MODULE,
+                                            class=[btn,'btn-default']
+                                        },
+                                        #button{
+                                            id=ResetButtonID,
+                                            text=Rec#paginate.reset_button_text,
+                                            class=[paginate_reset_button,btn,'btn-warning'],
+                                            style="display:none",
+                                            click=[
+                                                #fade{},
+                                                #set{target=SearchTextID,value=""},
+                                                #event{delegate=?MODULE,postback=Postback#paginate_postback{mode=reset}}
+                                            ]
+                                        }
+                                    ]}
+                                ]}
+                            ]}
                         ]}
                     ]},
                     #tablecell{body=[
