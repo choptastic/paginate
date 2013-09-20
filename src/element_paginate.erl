@@ -105,6 +105,7 @@ render_element(Rec = #paginate{}) ->
                         #panel{class=paginate_perpage_wrapper,body=[
                             #dropdown{
                                 id=PerPageID,
+                                %class='form-control',
                                 options=[perpage_option(PerPage,N,Rec#paginate.perpage_format) || N <- Rec#paginate.perpage_options],
                                 actions=PostbackEvents
                             }
@@ -122,6 +123,8 @@ render_element(Rec = #paginate{}) ->
 perpage_option(PerPage,Num,Format) ->
     #option{value=wf:pickle(Num),text=wf:f(Format,[Num]),selected=PerPage==Num}.
 
+page_selector(_, 0, _) ->
+    [];
 page_selector(_, 1, _) ->
     [];
 page_selector(Selected, NumPages, Postback) ->
