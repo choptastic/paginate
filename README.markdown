@@ -1,6 +1,6 @@
 # paginate
 
-A pagination element plugin for [Nitrogen Web Framework](http://nitrogenoproject.com)
+A pagination element plugin for [Nitrogen Web Framework](http://nitrogenproject.com) ([GitHub](http://github.com/nitrogen/nitrogen))
 
 ## Installing into a Nitrogen Application
 
