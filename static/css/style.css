@@ -46,6 +46,7 @@ a.paginate_page:link {
 .paginate_search {
 	min-width:300px;
 }
+
 .paginate_perpage {
-	width:100px;
+	width:150px;
 }
