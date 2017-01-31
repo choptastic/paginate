@@ -43,3 +43,9 @@ a.paginate_page:link {
 	margin: 0 0.3em 0 0.3em;
 }
 
+.paginate_search {
+	min-width:300px;
+}
+.paginate_perpage {
+	width:100px;
+}

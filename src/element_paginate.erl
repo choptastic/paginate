@@ -74,7 +74,12 @@ render_element(Rec = #paginate{}) ->
                         #panel{class=paginate_header_search,body=[
                             #panel{class='col-lg-4', body=[
                                 #panel{class='input-group',body=[
-                                    #textbox{class='form-control',id=SearchTextID,postback=Postback,delegate=?MODULE},
+                                    #textbox{
+                                        class=['form-control', paginate_search],
+                                        id=SearchTextID,
+                                        postback=Postback,
+                                        delegate=?MODULE
+                                    },
                                     #span{class='input-group-btn',body=[
                                         #button{
                                             text=Rec#paginate.search_button_text,
@@ -105,7 +110,7 @@ render_element(Rec = #paginate{}) ->
                         #panel{class=paginate_perpage_wrapper,body=[
                             #dropdown{
                                 id=PerPageID,
-                                %class='form-control',
+                                class=['form-control', paginate_perpage],
                                 options=[perpage_option(PerPage,N,Rec#paginate.perpage_format) || N <- Rec#paginate.perpage_options],
                                 actions=PostbackEvents
                             }
