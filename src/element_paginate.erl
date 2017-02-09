@@ -37,6 +37,9 @@ render_element(Rec = #paginate{}) ->
     CurPage = Rec#paginate.page,
     PerPage = Rec#paginate.perpage,
     ID = Rec#paginate.id,
+    ShowPerPage = Rec#paginate.show_perpage,
+    ShowSearch = Rec#paginate.show_search,
+    ShowEither = ShowPerPage orelse ShowSearch,
 
     Postback = #paginate_postback{
         delegate=Delegate,
@@ -68,10 +71,10 @@ render_element(Rec = #paginate{}) ->
         class=[paginate, Rec#paginate.class],
         style=Rec#paginate.style,
         body=[
-            #panel{class=paginate_header,body=[
+            #panel{show_if=ShowEither, class=paginate_header,body=[
                 #singlerow{cells=[
                     #tablecell{body=[
-                        #panel{class=paginate_header_search,body=[
+                        #panel{show_if=ShowSearch, class=paginate_header_search,body=[
                             #panel{class='col-lg-4', body=[
                                 #panel{class='input-group',body=[
                                     #textbox{
@@ -107,7 +110,7 @@ render_element(Rec = #paginate{}) ->
                         #spinner{class=paginate_spinner}
                     ]},
                     #tablecell{body=[
-                        #panel{class=paginate_perpage_wrapper,body=[
+                        #panel{show_if=ShowPerPage, class=paginate_perpage_wrapper,body=[
                             #dropdown{
                                 id=PerPageID,
                                 class=['form-control', paginate_perpage],

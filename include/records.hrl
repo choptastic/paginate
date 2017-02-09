@@ -8,7 +8,9 @@
 		reset_button_text="Reset"		:: text(),
 		perpage_options=[10,20,50,100]	:: [integer()],
 		body=[]							:: body(),
-		perpage_format="~B per page"	:: text()
+		perpage_format="~B per page"	:: text(),
+        show_search=true                :: boolean(),
+        show_perpage=true               :: boolean()
 	}).
 
 -record(paginate_event, {
