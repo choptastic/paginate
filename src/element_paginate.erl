@@ -147,7 +147,9 @@ page_link(Current, _Selected, Postback) ->
         postback=Postback#paginate_postback{page=Current},
         delegate=?MODULE
     }.
-    
+   
+total_pages(_, undefined) ->
+    1;
 total_pages(TotalItems, PerPage) ->
     _TotalPages = (TotalItems div PerPage) + ?WF_IF(TotalItems rem PerPage == 0, 0, 1).
 
