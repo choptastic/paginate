@@ -39,6 +39,7 @@ render_element(Rec = #paginate{}) ->
     ID = Rec#paginate.id,
     ShowPerPage = Rec#paginate.show_perpage,
     ShowSearch = Rec#paginate.show_search,
+    MiddleFilters = Rec#paginate.middle_filters,
     ShowEither = ShowPerPage orelse ShowSearch,
 
     Postback = #paginate_postback{
@@ -106,6 +107,7 @@ render_element(Rec = #paginate{}) ->
                             ]}
                         ]}
                     ]},
+                    #tablecell{class=paginate_middle_filters, body=MiddleFilters},
                     #tablecell{body=[
                         #spinner{class=paginate_spinner}
                     ]},

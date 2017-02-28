@@ -7,6 +7,7 @@
 		search_button_text="Search"		:: text(),
 		reset_button_text="Reset"		:: text(),
 		perpage_options=[10,20,50,100]	:: [integer()],
+        middle_filters=[]               :: body(),
 		body=[]							:: body(),
 		perpage_format="~B per page"	:: text(),
         show_search=true                :: boolean(),
