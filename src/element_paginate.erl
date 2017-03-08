@@ -116,6 +116,7 @@ render_element(Rec = #paginate{}) ->
                             #dropdown{
                                 id=PerPageID,
                                 class=['form-control', paginate_perpage],
+                                value=hd(Rec#paginate.perpage_options),
                                 options=[perpage_option(PerPage,N,Rec#paginate.perpage_format) || N <- Rec#paginate.perpage_options],
                                 actions=PostbackEvents
                             }
