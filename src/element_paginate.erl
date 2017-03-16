@@ -37,6 +37,7 @@ render_element(Rec = #paginate{}) ->
     CurPage = Rec#paginate.page,
     PerPage = Rec#paginate.perpage,
     ID = Rec#paginate.id,
+    SearchButtonID = Rec#paginate.search_button_id,
     ShowPerPage = Rec#paginate.show_perpage,
     ShowSearch = Rec#paginate.show_search,
     MiddleFilters = Rec#paginate.middle_filters,
@@ -86,6 +87,7 @@ render_element(Rec = #paginate{}) ->
                                     },
                                     #span{class='input-group-btn',body=[
                                         #button{
+                                            id=SearchButtonID,
                                             text=Rec#paginate.search_button_text,
                                             postback=Postback,
                                             delegate=?MODULE,

@@ -11,7 +11,8 @@
 		body=[]							:: body(),
 		perpage_format="~B per page"	:: text(),
         show_search=true                :: boolean(),
-        show_perpage=true               :: boolean()
+        show_perpage=true               :: boolean(),
+        search_button_id                :: id()
 	}).
 
 -record(paginate_event, {
