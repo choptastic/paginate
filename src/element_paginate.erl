@@ -141,7 +141,28 @@ page_selector(_, 0, _) ->
 page_selector(_, 1, _) ->
     [];
 page_selector(Selected, NumPages, Postback) ->
-    ["Pages: ",[[" ",page_link(Current, Selected, Postback)] || Current <- lists:seq(1,NumPages)]].
+    ["Pages: ",draw_page_links(Selected, Postback, NumPages)].
+
+%draw_page_links(Selected, Postback, NumPages) =< 9 ->
+%    [[" ",page_link(Current, Selected, Postback)] || Current <- lists:seq(1, NumPages)];
+draw_page_links(Selected, Postback, NumPages) ->
+    ToDraw = [1, 2,
+              Selected - 1 , Selected, Selected + 1,
+              NumPages-1, NumPages],
+    
+    draw_page_links_worker(Selected, 1, NumPages, Postback, ToDraw, true).
+
+draw_page_links_worker(_, Current, NumPages, _, _, _) when Current > NumPages ->
+    [];
+draw_page_links_worker(Selected, Current, NumPages, Postback, ToDraw, WasLastDrawn) ->
+    DrawThis = lists:member(Current, ToDraw),
+    ShowElipsis = not(WasLastDrawn) andalso DrawThis,
+    Elipsis = ?WF_IF(ShowElipsis, " &nbsp; &nbsp; &#8230; &nbsp; &nbsp; "),
+    RenderedItem = case DrawThis of
+        false -> [];
+        true -> [" ",page_link(Current, Selected, Postback)]
+    end,
+    [Elipsis, RenderedItem, draw_page_links_worker(Selected, Current+1, NumPages, Postback, ToDraw, DrawThis)].
 
 page_link(Selected, Selected, _Postback) ->
     #span{class=paginate_current, text=wf:to_list(Selected)};
