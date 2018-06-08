@@ -19,7 +19,9 @@
         page_id,
         bottom_page_id,
         perpage_id,
-        body_id
+        body_id,
+        perpage_options=[],
+        perpage_default
     }).
 
 reflect() -> record_info(fields, paginate).
@@ -42,6 +44,7 @@ render_element(Rec = #paginate{}) ->
     ShowSearch = Rec#paginate.show_search,
     MiddleFilters = Rec#paginate.middle_filters,
     ShowEither = ShowPerPage orelse ShowSearch,
+    PerPageOptions = Rec#paginate.perpage_options,
 
     Postback = #paginate_postback{
         delegate=Delegate,
@@ -53,7 +56,9 @@ render_element(Rec = #paginate{}) ->
         perpage_id=PerPageID,
         body_id=BodyID,
         tag=Tag,
-        page=CurPage
+        page=CurPage,
+        perpage_options=PerPageOptions,
+        perpage_default=PerPage
     },
 
     RefreshPostback = Postback#paginate_postback{mode={refresh,""}},
@@ -134,7 +139,7 @@ render_element(Rec = #paginate{}) ->
     element_panel:render_element(Terms).
 
 perpage_option(PerPage,Num,Format) ->
-    #option{value=wf:pickle(Num),text=wf:f(Format,[Num]),selected=PerPage==Num}.
+    #option{value=wf:to_list(Num),text=wf:f(Format,[Num]),selected=(PerPage==Num)}.
 
 page_selector(_, 0, _) ->
     [];
@@ -189,6 +194,15 @@ refresh(Tag) ->
     Postback = get_refresh_postback(Tag),
     event(Postback).
 
+verify_perpage_options(Options, PerPage, Default) ->
+    try lists:member(wf:to_integer(PerPage), Options) of
+        true -> wf:to_integer(PerPage);
+        false -> Default
+    catch
+        _:_ -> Default
+    end.
+
+
 event(Postback = #paginate_postback{
                 mode=Mode,
                 perpage_id=PerPageID,
@@ -199,8 +213,10 @@ event(Postback = #paginate_postback{
                 bottom_page_id=BottomPageID,
                 tag=Tag,
                 page=Page,
-                delegate=Delegate}) ->
-    PerPage = wf:depickle(wf:q(PerPageID)),
+                delegate=Delegate,
+                perpage_options=PerPageOptions,
+                perpage_default=PerPageDefault}) ->
+    PerPage = verify_perpage_options(PerPageOptions, wf:q(PerPageID), PerPageDefault),
 
     SearchText = case Mode of
         reset -> "";
