@@ -50,3 +50,14 @@ a.paginate_page:link {
 .paginate_perpage {
 	width:150px;
 }
+
+@media all and (max-width: 768px) {
+	.paginate_header td {
+		display: block;
+	}
+	.paginate_search {
+		width:70%;
+		min-width:auto;
+	}
+}
+	
