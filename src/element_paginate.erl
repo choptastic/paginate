@@ -73,7 +73,7 @@ render_element(Rec = #paginate{}) ->
         body=page_selector(CurPage, NumPages, Postback)
     },
 
-    Terms = #panel{
+    #panel{
         id=ID,
         class=[paginate, Rec#paginate.class],
         style=Rec#paginate.style,
@@ -135,8 +135,7 @@ render_element(Rec = #paginate{}) ->
             #panel{id=BodyID, body=Rec#paginate.body},
             PageSelectorPanel#panel{id=BottomPageID}
         ]
-    },
-    element_panel:render_element(Terms).
+    }.
 
 perpage_option(PerPage,Num,Format) ->
     #option{value=wf:to_list(Num),text=wf:f(Format,[Num]),selected=(PerPage==Num)}.
